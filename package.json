@@ -1,0 +1,30 @@
+{
+  "name": "silica-ts",
+  "version": "0.1.0",
+  "description": "Typescript Bindings for the Silica API",
+  "dependencies": {
+    "crypto-es": "^1.2.7"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "([ tsconfig.json -nt tsconfig.js ] || node tsconfig.js) && tsc",
+    "test": "echo \"No tests yet."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/common-edge/silica-ts.git"
+  },
+  "keywords": [
+    "silica"
+  ],
+  "author": "CommonEdge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/common-edge/silica-ts/issues"
+  },
+  "homepage": "https://github.com/common-edge/silica-ts#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4",
+    "@types/node": "^16.7.8"
+  }
+}
