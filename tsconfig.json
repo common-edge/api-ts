@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals" : true,
+		"lib": [ "ES2020" ],
+		"moduleResolution": "node",
+
+		"baseUrl": "./",
+		"rootDir": "src",
+
+		"skipLibCheck": true,
+		"composite": true,
+		"sourceMap": true,
+		"target": "ES6",
+		"module": "ES6",
+		"outDir": "lib"
+
+	}
+}
