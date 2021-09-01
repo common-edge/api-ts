@@ -1,1 +1,1 @@
-export * as Silica from "./Silica";
+export * from "./Silica";
