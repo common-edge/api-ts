@@ -2,6 +2,9 @@ import CryptoES from 'crypto-es';
 import { URL } from 'builtin-url';
 import XMLHttpRequest from 'xhr2';
 
+export * as Template from './Template';
+export * as Language from './Language';
+
 export interface AuthKey {
     token: string;
     secret: string;
