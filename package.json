@@ -5,13 +5,17 @@
   "dependencies": {
     "builtin-url": "^0.1.0",
     "crypto-es": "^1.2.7",
+    "fp-ts": "^2.11.5",
+    "monocle-ts": "^2.3.11",
     "xhr2": "^0.2.1"
   },
   "type": "module",
   "main": "lib/index.js",
   "browser": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": [ "/lib" ],
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "echo \"No tests yet."
@@ -21,7 +25,7 @@
     "url": "git+https://github.com/common-edge/api-ts.git"
   },
   "keywords": [
-		"CommonEdge",
+    "CommonEdge",
     "silica"
   ],
   "author": "CommonEdge",

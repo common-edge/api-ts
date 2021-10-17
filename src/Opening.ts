@@ -40,10 +40,18 @@ export type OpeningInfo = null;
 export const isOpeningInfo = (x: any): x is OpeningInfo => true;
 
 /**
- * An Opening in a structure - a model of a bredth of the floor, walls, and
+ * An `Opening` in a structure - a model of a bredth of the floor, walls, and
  * ceiling which may be filled with glass.
  *
  * @category Opening
  */
 export type Opening = Poly.Opening<EdgeInfo,JointInfo,SectionInfo,OpeningInfo>;
 export const isOpening: Guard<Opening> = Poly.isOpening(isEdgeInfo, isJointInfo, isSectionInfo, isOpeningInfo);
+
+/**
+ * An `Section` in an `Opening` - a model of a straight length of floor and ceiling.
+ *
+ * @category Opening
+ */
+export type Section = Poly.Section<EdgeInfo,JointInfo,SectionInfo>;
+export const isSection: Guard<Section> = Poly.isSection(isEdgeInfo, isJointInfo, isSectionInfo);
