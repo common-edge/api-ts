@@ -2,16 +2,24 @@ import CryptoES from 'crypto-es';
 import { URL } from 'builtin-url';
 import XMLHttpRequest from 'xhr2';
 
-export * as Template from './Template';
-export * as Language from './Language';
+import { Guard } from '../type-helpers';
+import { Requestor } from '../Requestor';
 
+/**
+ * Glassd Authentication Key Pair.
+ */
 export interface AuthKey {
+    /** Plaintext token to identify user. */
     token: string;
+    /** HMAC shared key to authenticate user. */
     secret: string;
-}
+};
 
-export const Request = (endpoint: string, auth: AuthKey) => {
-
+/**
+ * Create a `Requestor` for legacy "Glassd Web Service"-style authentication,
+ * probably derived from AWS authenication.
+ */
+export const CreateRequestor = (endpoint: string, auth: AuthKey): Requestor => {
     const authorization = (url: URL, method: string, body: string): string => {
         const message = method + url.pathname + url.search + CryptoES.MD5(body);
         return "GWS " + auth.token + ":" + CryptoES.HmacSHA1(message, auth.secret);
@@ -31,28 +39,32 @@ export const Request = (endpoint: string, auth: AuthKey) => {
                 if (xhr.status === 0 || (200 <= xhr.status || xhr.status < 400)) {
                     resolve(xhr.responseText);
                 } else {
-                    reject({status: xhr.status, response: xhr.responseText});
+                    reject({error: "HTTP request failure", status: xhr.status, response: xhr.responseText});
                 }
             });
-            xhr.addEventListener('error', reject);
+            xhr.addEventListener('error', (e) => {
+                reject({error: "HTTP request exception", exception: e});
+            });
             xhr.send(body);
         });
     };
 
-    const requestTyped = <T>(guard: (o: any) => o is T) => (path: string, method: string, data?: object|undefined): Promise<T> =>
+    const request = <T>(guard: Guard<T>) => (path: string, method: string, data?: object|undefined): Promise<T> =>
         requestRaw(path, method, data).then((resp) => {
-            const parsed = JSON.parse(resp)
-            if (guard(parsed)) {
-                return parsed;
-            } else {
-                throw { error: "Response failed type validation.", response: parsed };
+            try {
+                const parsed = JSON.parse(resp)
+                if (guard(parsed)) {
+                    return Promise.resolve(parsed);
+                } else {
+                    return Promise.reject({ error: "Type validation failure", response: parsed });
+                }
+            } catch (e) {
+                return Promise.reject({ error: "JSON parse exception", exception: e, response: resp });
             }
         });
 
     return {
-        authorization,
         requestRaw,
-        requestTyped,
+        request,
     };
-
 };
