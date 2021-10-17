@@ -1,7 +1,7 @@
 {
-  "name": "silica-client",
+  "name": "@commonedge/api",
   "version": "0.1.0",
-  "description": "Typescript Bindings for the Silica API",
+  "description": "Typescript Bindings for the CommonEdge API",
   "dependencies": {
     "builtin-url": "^0.1.0",
     "crypto-es": "^1.2.7",
@@ -18,17 +18,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/common-edge/silica-client-ts.git"
+    "url": "git+https://github.com/common-edge/api-ts.git"
   },
   "keywords": [
+		"CommonEdge",
     "silica"
   ],
   "author": "CommonEdge",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/common-edge/silica-client-ts/issues"
+    "url": "https://github.com/common-edge/api-ts/issues"
   },
-  "homepage": "https://github.com/common-edge/silica-client-ts#readme",
+  "homepage": "https://github.com/common-edge/api-ts#readme",
   "devDependencies": {
     "typescript": "^4.4.2"
   }
