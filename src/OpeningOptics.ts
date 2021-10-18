@@ -17,10 +17,10 @@ export { Poly };
  *
  * @category Opening
  */
-export const openingDivision = (section: Poly.SectionStep[], division: DivisionStep[]): Optional<Opening, Division> =>
+export const openingDivision = (section: SectionStep[], division: DivisionStep[]): Optional<Opening, Division> =>
     Poly.openingSection<EdgeInfo,JointInfo,Strategy,OpeningInfo>().asOptional()
         .compose(Poly.sectionSection<EdgeInfo,JointInfo,Strategy>(section))
-        .compose(sectionDivision().asOptional())
+        .compose(sectionDivision.asOptional())
         .compose(divisionDivision(division));
 
 /**
@@ -31,5 +31,12 @@ export const openingDivision = (section: Poly.SectionStep[], division: DivisionS
  *
  * @category Section
  */
-export const sectionDivision = (): Lens<Section, Division> =>
-    Poly.sectionInfo<EdgeInfo,JointInfo,Strategy>().compose(strategyDivision());
+export const sectionDivision: Lens<Section, Division> =
+    Poly.sectionInfo<EdgeInfo,JointInfo,Strategy>().compose(strategyDivision);
+
+/**
+ * A single step of an index of a `Section`.
+ *
+ * @category Section
+ */
+export type SectionStep = Poly.SectionStep;

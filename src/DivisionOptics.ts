@@ -15,7 +15,7 @@ export { Poly };
  *
  * @category Strategy
  */
-export const strategyDivision = (): Lens<Strategy, Division> => Poly.strategyDivision<EdgeInfo,PanelInfo>();
+export const strategyDivision: Lens<Strategy, Division> = Poly.strategyDivision<EdgeInfo,PanelInfo>();
 
 /**
  * Focus on a child `Division`, given it's index.
@@ -23,6 +23,13 @@ export const strategyDivision = (): Lens<Strategy, Division> => Poly.strategyDiv
  * @category Division
  */
 export const divisionDivision = (is: DivisionStep[]): Optional<Division, Division> => Poly.divisionDivision<EdgeInfo,PanelInfo>(is);
+
+/**
+ * Focus on an immediate child `Division`, given a single index.
+ *
+ * @category Division
+ */
+export const divisionDivisionStep = (i: DivisionStep): Optional<Division, Division> => Poly.divisionDivisionStep<EdgeInfo,PanelInfo>(i);
 
 /**
  * A single step of an index of a `Division`.

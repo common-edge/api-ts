@@ -1,5 +1,6 @@
-import { Guard, isObject, isString } from '../type-helpers';
+import { Guard, isObject } from '../type-helpers';
 import { Angle, isAngle, Distance, isDistance, Nat, isNat } from '../Numbers';
+import { Side, isSide } from '../Side';
 
 /** What strategy should we use to divide the planes into panels? */
 export type Strategy<A,B> = StrategyManual<A,B> | StrategyMinimal<A,B>;
@@ -84,13 +85,3 @@ export interface CurveBezier {
 export const isCurveBezier = (x: any): x is CurveBezier => isObject(x)
     && x.Curve === "Bezier"
     && isSide(x.Side);
-
-/** Sides of a panel. */
-export type Side = 'left' | 'right' | 'top' | 'bottom';
-export const sideMap: {[k in Side]: true} = {
-    'left': true,
-    'right': true,
-    'top': true,
-    'bottom': true,
-};
-export const isSide = (x: any): x is Side => isString(x) && sideMap.hasOwnProperty(x);
