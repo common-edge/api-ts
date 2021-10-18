@@ -10,14 +10,14 @@
     "xhr2": "^0.2.1"
   },
   "type": "module",
-  "main": "lib/index.js",
-  "browser": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "/lib"
-  ],
+  "main": "index.js",
+  "browser": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -f .npmignore package.json lib/",
+		"pack": "npm run build && cd lib && npm pack",
+		"prepublishOnly": "cd .. && npm run build",
+		"publish": "cd lib && npm publish",
     "test": "echo \"No tests yet."
   },
   "repository": {
