@@ -1,15 +1,17 @@
+// Common somewhat generic models.
+export * as Language from "./Language";
+export * as Numbers from "./Numbers";
+export * as Boxes from "./Boxes";
+export * as BoxesOptics from "./BoxesOptics";
 
-export * as Requestor from "./Requestor";
-
+// Legacy Glassd models.
 export * as Glassd from "./Glassd";
 
-export * as Opening from "./Opening";
-export * as OpeningOptics from "./OpeningOptics";
-export * as Division from "./Division";
-export * as DivisionOptics from "./DivisionOptics";
-export * as Panel from "./Panel";
+// Current Silica models.
+export * as Silica from "./Silica";
 
-export * as Template from "./Template";
+// Application specific models.
+export * as Side from "./Side";
 
-export * as Boxes from "./Boxes";
-export * as Numbers from "./Numbers";
+// Connectivity.
+export * as Requestor from "./Requestor";

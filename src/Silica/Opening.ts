@@ -1,7 +1,7 @@
 /**
  * Concrete Opening Types and Guards.
  */
-import { Guard } from './type-helpers';
+import { Guard } from '../type-helpers';
 
 import { Strategy, isStrategy } from './Division';
 import { EdgeInfo, isEdgeInfo } from './Panel';

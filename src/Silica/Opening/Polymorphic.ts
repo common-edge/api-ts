@@ -1,9 +1,9 @@
 /**
  * Polymorphic Opening Types and Guards.
  */
-import { Guard, isObject, isNumber, isString, isNonEmpty } from '../type-helpers';
-import { Angle, isAngle, Distance, isDistance } from '../Numbers';
-import { OneOrUptoThree, isOneUptoThree } from '../Boxes';
+import { Guard, isObject, isNumber, isString, isNonEmpty } from '../../type-helpers';
+import { Angle, isAngle, Distance, isDistance } from '../../Numbers';
+import { OneOrUptoThree, isOneUptoThree } from '../../Boxes';
 
 /**
  * An `Opening` in a structure, paramaterized by information at various places.

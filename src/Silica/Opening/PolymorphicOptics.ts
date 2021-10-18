@@ -1,9 +1,9 @@
 import { Lens, Optional } from 'monocle-ts';
-import { idOpt } from '../optics';
+import { idOpt } from '../../optics';
 
 import { Opening, Wall, SectionTree, Section } from './Polymorphic';
-import { OneOrUptoThree } from '../Boxes';
-import { uptoThree } from '../BoxesOptics';
+import { OneOrUptoThree } from '../../Boxes';
+import { uptoThree } from '../../BoxesOptics';
 
 /**
  * Focus on the top `SectionTree` of an `Opening`.

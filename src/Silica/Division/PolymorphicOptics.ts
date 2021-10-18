@@ -1,6 +1,6 @@
 import { Lens, Optional } from 'monocle-ts';
 import { some, none } from 'fp-ts/Option';
-import { idOpt } from '../optics';
+import { idOpt } from '../../optics';
 
 import { Division, Strategy } from '../Division/Polymorphic';
 

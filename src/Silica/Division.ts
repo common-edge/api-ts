@@ -1,7 +1,7 @@
 /**
  * Concrete Division and Strategy Types and Guards, used in the submitted model.
  */
-import { Guard } from './type-helpers';
+import { Guard } from '../type-helpers';
 
 import { EdgeInfo, isEdgeInfo, PanelInfo, isPanelInfo } from './Panel';
 import * as Poly from './Division/Polymorphic';

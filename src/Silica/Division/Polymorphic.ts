@@ -1,6 +1,6 @@
-import { Guard, isObject } from '../type-helpers';
-import { Angle, isAngle, Distance, isDistance, Nat, isNat } from '../Numbers';
-import { Side, isSide } from '../Side';
+import { Guard, isObject } from '../../type-helpers';
+import { Angle, isAngle, Distance, isDistance, Nat, isNat } from '../../Numbers';
+import { Side, isSide } from '../../Side';
 
 /** What strategy should we use to divide the planes into panels? */
 export type Strategy<A,B> = StrategyManual<A,B> | StrategyMinimal<A,B>;

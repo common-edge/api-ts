@@ -16,7 +16,7 @@ export const isNumber = (x: any): x is number => typeof x === 'number';
 export const isString = (x: any): x is string => typeof x === 'string';
 
 /** verify something is a object */
-export const isObject = (x: any): x is Object => typeof x === 'object';
+export const isObject = (x: any): x is Object => typeof x === 'object' && x !== null;
 
 /** verify something is a boolean */
 export const isBoolean = (x: any): x is boolean => x === true || x === false;

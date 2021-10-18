@@ -1,10 +1,10 @@
-import { Requestor } from './Requestor';
-import { Guard, isArray, isBoth, isObject, isString } from './type-helpers';
+import { Requestor } from '../Requestor';
+import { Guard, isArray, isBoth, isObject, isString } from '../type-helpers';
 
 export { Want, isWant } from './Calc/Want';
 
 export const calc = (req: Requestor) => <T extends object>(want: T, isT: Guard<T>): Promise<T & CalcMessages> =>
-    req.request<T & CalcMessages>(isBoth(isT,isCalcMessages))('/calc/shower', 'POST', want);
+    req.request<T & CalcMessages>(isBoth(isT,isCalcMessages))('calc/shower', 'POST', want);
 
 export interface CalcMessages {
     messages?: CalcMessage[];

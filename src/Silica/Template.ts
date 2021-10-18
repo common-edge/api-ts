@@ -1,5 +1,5 @@
-import { Translations, isTranslations } from './Language';
-import { Guard, NonEmpty, isNonEmpty, isNumber, isObject, isString } from './type-helpers';
+import { Translations, isTranslations } from '../Language';
+import { Guard, NonEmpty, isNonEmpty, isNumber, isObject, isString } from '../type-helpers';
 
 /** A template for simplified interaction with any model.
  *

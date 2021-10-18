@@ -1,4 +1,4 @@
-import { Guard, isNull } from '../type-helpers';
+import { Guard, isNull } from '../../type-helpers';
 /**
  * We have `S` and want `T`, or we don`t and set it to `null`.
  */

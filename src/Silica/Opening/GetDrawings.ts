@@ -1,9 +1,9 @@
 import { Opening, isOpening } from '../Opening';
 import { calc, Want, isWant } from '../Calc';
-import { Requestor } from '../Requestor';
+import { Requestor } from '../../Requestor';
 
-import { Angle, isAngle } from '../Numbers';
-import { isArray, isObject, isString, isBoolean } from '../type-helpers';
+import { Angle, isAngle } from '../../Numbers';
+import { isArray, isObject, isString, isBoolean } from '../../type-helpers';
 
 export const getDrawings = (req: Requestor) => (opening: Opening, drawings: Draw[]): Promise<string[]> =>
     calc(req)({ silicaOpening: opening, silicaDrawings: drawings }, isGetDrawings)
