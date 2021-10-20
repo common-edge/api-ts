@@ -1,7 +1,7 @@
 import { Lens, Optional } from 'monocle-ts';
 
-import { Opening, OpeningInfo, JointInfo, Section } from './Opening';
-import { Division, Strategy } from './Division';
+import { Opening, OpeningInfo, SectionInfo, JointInfo, Section } from './Opening';
+import { Division } from './Division';
 import { EdgeInfo } from './Panel';
 import { strategyDivision, divisionDivision, DivisionStep } from './DivisionOptics';
 
@@ -18,8 +18,8 @@ export { Poly };
  * @category Opening
  */
 export const openingDivision = (section: SectionStep[], division: DivisionStep[]): Optional<Opening, Division> =>
-    Poly.openingSection<EdgeInfo,JointInfo,Strategy,OpeningInfo>().asOptional()
-        .compose(Poly.sectionSection<EdgeInfo,JointInfo,Strategy>(section))
+    Poly.openingSection<EdgeInfo,JointInfo,SectionInfo,OpeningInfo>().asOptional()
+        .compose(Poly.sectionSection<EdgeInfo,JointInfo,SectionInfo>(section))
         .compose(sectionDivision.asOptional())
         .compose(divisionDivision(division));
 
@@ -32,7 +32,7 @@ export const openingDivision = (section: SectionStep[], division: DivisionStep[]
  * @category Section
  */
 export const sectionDivision: Lens<Section, Division> =
-    Poly.sectionInfo<EdgeInfo,JointInfo,Strategy>().compose(strategyDivision);
+    Poly.sectionInfo<EdgeInfo,JointInfo,SectionInfo>().compose(strategyDivision);
 
 /**
  * A single step of an index of a `Section`.

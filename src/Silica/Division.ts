@@ -1,9 +1,7 @@
 /**
  * Concrete Division and Strategy Types and Guards, used in the submitted model.
  */
-import { Guard } from '../type-helpers';
-
-import { EdgeInfo, isEdgeInfo, PanelInfo, isPanelInfo } from './Panel';
+import { EdgeInfo, PanelInfo } from './Panel';
 import * as Poly from './Division/Polymorphic';
 
 export { Poly };
@@ -16,7 +14,7 @@ export { Poly };
  * @category Strategy
  */
 export type Strategy = Poly.Strategy<EdgeInfo,PanelInfo>;
-export const isStrategy: Guard<Strategy> = Poly.isStrategy(isEdgeInfo,isPanelInfo);
+export const Strategy = Poly.Strategy(EdgeInfo,PanelInfo);
 
 /**
  * A `Division`.
@@ -26,7 +24,7 @@ export const isStrategy: Guard<Strategy> = Poly.isStrategy(isEdgeInfo,isPanelInf
  * @category Division
  */
 export type Division = Poly.Division<EdgeInfo,PanelInfo>;
-export const isDivision: Guard<Division> = Poly.isDivision(isEdgeInfo,isPanelInfo);
+export const Division = Poly.Division(EdgeInfo,PanelInfo);
 
 /**
  * A `Whole` panel in a `Division`.
@@ -36,7 +34,7 @@ export const isDivision: Guard<Division> = Poly.isDivision(isEdgeInfo,isPanelInf
  * @category Division
  */
 export type DivisionWhole = Poly.DivisionWhole<EdgeInfo,PanelInfo>;
-export const isDivisionWhole: Guard<DivisionWhole> = Poly.isDivisionWhole(isEdgeInfo,isPanelInfo);
+export const DivisionWhole = Poly.DivisionWhole(EdgeInfo,PanelInfo);
 
 /**
  * A `Divided` panel in a `Division`.
@@ -46,4 +44,4 @@ export const isDivisionWhole: Guard<DivisionWhole> = Poly.isDivisionWhole(isEdge
  * @category Division
  */
 export type DivisionDivided = Poly.DivisionDivided<EdgeInfo,PanelInfo>;
-export const isDivisionDivided: Guard<DivisionDivided> = Poly.isDivisionDivided(isEdgeInfo,isPanelInfo);
+export const DivisionDivided = Poly.DivisionDivided(EdgeInfo,PanelInfo);

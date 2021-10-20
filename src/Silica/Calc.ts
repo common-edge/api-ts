@@ -1,30 +1,30 @@
+import * as t from 'io-ts';
+export { Want } from './Calc/Want';
+
 import { Requestor } from '../Requestor';
-import { Guard, isArray, isBoth, isObject, isString } from '../type-helpers';
 
-export { Want, isWant } from './Calc/Want';
+export const calc = (req: Requestor) => <T extends object>(want: T, codecT: t.Type<T>): Promise<T & CalcMessages> =>
+    req.request<T & CalcMessages>(t.intersection([codecT,CalcMessages]))('calc/shower', 'POST', want);
 
-export const calc = (req: Requestor) => <T extends object>(want: T, isT: Guard<T>): Promise<T & CalcMessages> =>
-    req.request<T & CalcMessages>(isBoth(isT,isCalcMessages))('calc/shower', 'POST', want);
-
-export interface CalcMessages {
-    messages?: CalcMessage[];
-};
-export const isCalcMessages = (x: any): x is CalcMessages => isObject(x)
-    && (x.messages === undefined || isArray(isCalcMessage)(x.messages));
+export type MessageLevel = t.TypeOf<typeof MessageLevel>;
+export const MessageLevel = t.keyof({
+    info: true,
+    warn: true,
+    error: true,
+});
 
 export interface CalcMessage {
     level: MessageLevel;
     text: string;
 };
-export const isCalcMessage = (x: any): x is CalcMessages => isObject(x)
-    && isMessageLevel(x.level)
-    && isString(x.text);
+export const CalcMessage: t.Type<CalcMessage> = t.interface({
+    level: MessageLevel,
+    text: t.string,
+});
 
-export type MessageLevel = 'info' | 'warn' | 'error';
-const mapMessageLevel: {[k in MessageLevel]: true} = {
-    info: true,
-    warn: true,
-    error: true,
+export interface CalcMessages {
+    messages?: CalcMessage[];
 };
-const isMessageLevel = (x: any): x is MessageLevel => isString(x)
-    && mapMessageLevel.hasOwnProperty(x);
+export const CalcMessages: t.Type<CalcMessages> = t.partial({
+    messages: t.array(CalcMessage),
+});

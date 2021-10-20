@@ -1,10 +1,10 @@
 /**
  * Concrete Opening Types and Guards.
  */
-import { Guard } from '../type-helpers';
+import * as t from 'io-ts';
 
-import { Strategy, isStrategy } from './Division';
-import { EdgeInfo, isEdgeInfo } from './Panel';
+import { Strategy } from './Division';
+import { EdgeInfo } from './Panel';
 import * as Poly from './Opening/Polymorphic';
 
 export { Poly };
@@ -16,8 +16,8 @@ export { Poly };
  *
  * @category Paramaters
  */
-export type JointInfo = null;
-export const isJointInfo = (x: any): x is JointInfo => true;
+export type JointInfo = t.TypeOf<typeof JointInfo>;
+export const JointInfo = t.unknown;
 
 /**
  * The information about each Section.
@@ -26,8 +26,8 @@ export const isJointInfo = (x: any): x is JointInfo => true;
  *
  * @category Paramaters
  */
-export type SectionInfo = Strategy;
-export const isSectionInfo: Guard<SectionInfo> = isStrategy;
+export type SectionInfo = t.TypeOf<typeof SectionInfo>;
+export const SectionInfo = Strategy;
 
 /**
  * The information at the level of the opening.
@@ -36,8 +36,8 @@ export const isSectionInfo: Guard<SectionInfo> = isStrategy;
  *
  * @category Paramaters
  */
-export type OpeningInfo = null;
-export const isOpeningInfo = (x: any): x is OpeningInfo => true;
+export type OpeningInfo = t.TypeOf<typeof OpeningInfo>;
+export const OpeningInfo = t.unknown;
 
 /**
  * An `Opening` in a structure - a model of a bredth of the floor, walls, and
@@ -45,8 +45,8 @@ export const isOpeningInfo = (x: any): x is OpeningInfo => true;
  *
  * @category Opening
  */
-export type Opening = Poly.Opening<EdgeInfo,JointInfo,SectionInfo,OpeningInfo>;
-export const isOpening: Guard<Opening> = Poly.isOpening(isEdgeInfo, isJointInfo, isSectionInfo, isOpeningInfo);
+export type Opening = t.TypeOf<typeof Opening>;
+export const Opening = Poly.Opening(EdgeInfo, JointInfo, SectionInfo, OpeningInfo);
 
 /**
  * An `Section` in an `Opening` - a model of a straight length of floor and ceiling.
@@ -54,4 +54,4 @@ export const isOpening: Guard<Opening> = Poly.isOpening(isEdgeInfo, isJointInfo,
  * @category Opening
  */
 export type Section = Poly.Section<EdgeInfo,JointInfo,SectionInfo>;
-export const isSection: Guard<Section> = Poly.isSection(isEdgeInfo, isJointInfo, isSectionInfo);
+export const Section: t.Type<Section> = Poly.Section(EdgeInfo, JointInfo, SectionInfo);

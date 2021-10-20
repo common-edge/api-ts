@@ -6,6 +6,7 @@
     "builtin-url": "^0.1.0",
     "crypto-es": "^1.2.7",
     "fp-ts": "^2.11.5",
+    "io-ts": "^2.2.16",
     "monocle-ts": "^2.3.11",
     "xhr2": "^0.2.1"
   },
@@ -15,9 +16,9 @@
   "types": "index.d.ts",
   "scripts": {
     "build": "tsc && cp -f .npmignore package.json lib/",
-		"pack": "npm run build && cd lib && npm pack",
-		"prepublishOnly": "cd .. && npm run build",
-		"publish": "cd lib && npm publish",
+    "pack": "npm run build && cd lib && npm pack",
+    "prepublishOnly": "cd .. && npm run build",
+    "publish": "cd lib && npm publish",
     "test": "echo \"No tests yet."
   },
   "repository": {

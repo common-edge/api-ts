@@ -1,87 +1,101 @@
-import { Guard, isObject } from '../../type-helpers';
-import { Angle, isAngle, Distance, isDistance, Nat, isNat } from '../../Numbers';
-import { Side, isSide } from '../../Side';
+import * as t from 'io-ts';
+import { Angle, Distance, Nat } from '../../Numbers';
+import { Side } from '../../Side';
 
 /** What strategy should we use to divide the planes into panels? */
 export type Strategy<A,B> = StrategyManual<A,B> | StrategyMinimal<A,B>;
-export const isStrategy = <A,B>(isA: Guard<A>, isB: Guard<B>) => (x: any): x is Strategy<A,B> =>
-    isStrategyManual(isA, isB)(x) || isStrategyMinimal(isA, isB)(x);
+export const Strategy = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<Strategy<A,B>> =>
+    t.union([
+        StrategyManual(codecA, codecB),
+        StrategyMinimal(codecA, codecB),
+    ]);
 
 /** Manually specify how to divide the plane into panels. */
 export interface StrategyManual<A,B> {
-    Strategy: "Manual";
+    Strategy: 'Manual';
     Division: Division<A,B>;
 }
-export const isStrategyManual = <A,B>(isA: Guard<A>, isB: Guard<B>) => (x: any): x is StrategyManual<A,B> => isObject(x)
-    && x.Strategy === "Manual"
-    && isDivision(isA,isB)(x.Division);
+export const StrategyManual = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<StrategyManual<A,B>> =>
+    t.interface({
+        Strategy: t.literal('Manual'),
+        Division: Division(codecA, codecB),
+    });
 
 /** Divide the plane into the smallest number of panels possible. */
 export interface StrategyMinimal<A,B> {
-    Strategy: "Minimal";
+    Strategy: 'Minimal';
     Info: B;
 }
-export const isStrategyMinimal = <A,B>(isA: Guard<A>, isB: Guard<B>) => (x: any): x is StrategyMinimal<A,B> => isObject(x)
-    && x.Strategy === "Minimal"
-    && isB(x.Info);
+export const StrategyMinimal = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<StrategyMinimal<A,B>> =>
+    t.interface({
+        Strategy: t.literal('Minimal'),
+        Info: codecB,
+    });
 
 /** The actual division of planes into panels. */
 export type Division<A,B> = DivisionWhole<A,B> | DivisionDivided<A,B>;
-export const isDivision = <A,B>(isA: Guard<A>, isB: Guard<B>) => (x: any): x is Division<A,B> =>
-    isDivisionWhole(isA, isB)(x) || isDivisionDivided(isA, isB)(x);
+export const Division = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<Division<A,B>> =>
+    t.recursion('Division', () =>
+        t.union([
+            DivisionWhole(codecA, codecB),
+            DivisionDivided(codecA, codecB),
+        ])
+    );
 
 /** Don't divide the panel. */
 export interface DivisionWhole<A,B> {
-    Division: "Whole";
+    Division: 'Whole';
     Info: B;
-}
-export const isDivisionWhole = <A,B>(isA: Guard<A>, isB: Guard<B>) => (x: any): x is DivisionWhole<A,B> => isObject(x)
-    && x.Division === "Whole"
-    && isB(x.Info);
+};
+export const DivisionWhole = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<DivisionWhole<A,B>> =>
+    t.interface({
+        Division: t.literal('Whole'),
+        Info: codecB,
+    });
 
 /** Divide the panel in two, by the curve, and then recurse on the left and right panels. */
 export interface DivisionDivided<A,B> {
-    Division: "Divided";
+    Division: 'Divided';
     Left: Division<A,B>;
     LeftEdge: A;
     Right: Division<A,B>;
     RightEdge: A;
     Curve: Curve;
-}
-export const isDivisionDivided = <A,B>(isA: Guard<A>, isB: Guard<B>) => (x: any): x is DivisionDivided<A,B> => isObject(x)
-    && x.Division === "Divided"
-    && isCurve(x.Curve)
-    && isA(x.LeftEdge)
-    && isA(x.RightEdge)
-    && isDivision(isA,isB)(x.Left)
-    && isDivision(isA,isB)(x.Right);
-
-/** A curve to divide the panels by. */
-export type Curve = CurveAngled | CurveBezier;
-export const isCurve = (x: any): x is Curve => isCurveAngled(x) || isCurveBezier(x);
+};
+export const DivisionDivided = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<DivisionDivided<A,B>> =>
+    t.recursion('DivisionDivided', () =>
+        t.interface({
+            Division: t.literal('Divided'),
+            Left: Division(codecA, codecB),
+            LeftEdge: codecA,
+            Right: Division(codecA, codecB),
+            RightEdge: codecA,
+            Curve: Curve,
+        })
+    );
 
 /** Cut a particular distance away from a corner along a side, at an angle relative to that side. */
-export interface CurveAngled {
-    Curve: "Angled";
-    Angle: Angle;
-    Corner: Nat;
-    Distance: Distance;
-    Side: Side;
-}
-export const isCurveAngled = (x: any): x is CurveAngled => isObject(x)
-    && x.Curve === "Angled"
-    && isAngle(x.Angle)
-    && isNat(x.Corner)
-    && isDistance(x.Distance)
-    && isSide(x.Side);
+export const CurveAngled = t.interface({
+    Curve: t.literal('Angled'),
+    Side: Side,
+    Angle: Angle,
+    Corner: Nat,
+    Distance: Distance,
+});
+export type CurveAngled = t.TypeOf<typeof CurveAngled>;
 
 /** Cut a third degree bezier across the panel.
  * TODO: placeholder, just here to enforce checking for the type of curve.
  */
-export interface CurveBezier {
-    Curve: "Bezier";
-    Side: Side;
-}
-export const isCurveBezier = (x: any): x is CurveBezier => isObject(x)
-    && x.Curve === "Bezier"
-    && isSide(x.Side);
+export const CurveBezier = t.interface({
+    Curve: t.literal('Bezier'),
+    Side: Side,
+});
+export type CurveBezier = t.TypeOf<typeof CurveBezier>;
+
+/** A curve to divide the panels by. */
+export const Curve = t.union([
+    CurveAngled,
+    CurveBezier,
+]);
+export type Curve = t.TypeOf<typeof Curve>;

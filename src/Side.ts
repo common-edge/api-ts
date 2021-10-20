@@ -1,11 +1,12 @@
-import { isString } from './type-helpers';
+import * as t from 'io-ts';
 
-/** Sides of a panel. */
-export type Side = 'left' | 'right' | 'top' | 'bottom';
-export const mapSide: {[k in Side]: true} = {
+/**
+ * Sides of a panel.
+ */
+export const Side = t.keyof({
     'left': true,
     'right': true,
     'top': true,
     'bottom': true,
-};
-export const isSide = (x: any): x is Side => isString(x) && mapSide.hasOwnProperty(x);
+});
+export type Side = t.TypeOf<typeof Side>;

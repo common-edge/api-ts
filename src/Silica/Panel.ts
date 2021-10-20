@@ -1,3 +1,5 @@
+import * as t from 'io-ts';
+
 /**
  * The information about each edge of a panel.
  *
@@ -5,8 +7,8 @@
  *
  * @category Paramaters
  */
-export type EdgeInfo = null;
-export const isEdgeInfo = (x: any): x is EdgeInfo => true;
+export type EdgeInfo = unknown;
+export const EdgeInfo = t.unknown;
 
 /**
  * The information about each panel.
@@ -15,5 +17,5 @@ export const isEdgeInfo = (x: any): x is EdgeInfo => true;
  *
  * @category Paramaters
  */
-export type PanelInfo = null;
-export const isPanelInfo = (x: any): x is PanelInfo => true;
+export type PanelInfo = unknown;
+export const PanelInfo = t.unknown;

@@ -2,7 +2,9 @@ import CryptoES from 'crypto-es';
 import { URL } from 'builtin-url';
 import XMLHttpRequest from 'xhr2';
 
-import { Guard } from '../type-helpers';
+import * as Either from 'fp-ts/Either';
+import { Decoder } from 'io-ts';
+
 import { Requestor } from '../Requestor';
 
 /**
@@ -49,15 +51,14 @@ export const CreateRequestor = (endpoint: string, auth: AuthKey): Requestor => {
         });
     };
 
-    const request = <T>(guard: Guard<T>) => (path: string, method: string, data?: object|undefined): Promise<T> =>
+    const request = <T>(dec: Decoder<unknown,T>) => (path: string, method: string, data?: object|undefined): Promise<T> =>
         requestRaw(path, method, data).then((resp) => {
             try {
-                const parsed = JSON.parse(resp)
-                if (guard(parsed)) {
-                    return Promise.resolve(parsed);
-                } else {
-                    return Promise.reject({ error: "Type validation failure", response: parsed });
-                }
+                const parsed = JSON.parse(resp);
+                return Either.match(
+                    (failures) => Promise.reject({ error: "JSON decode failure", response: parsed, failures }),
+                    (good: T) => Promise.resolve(good)
+                )(dec.decode(parsed));
             } catch (e) {
                 return Promise.reject({ error: "JSON parse exception", exception: e, response: resp });
             }
