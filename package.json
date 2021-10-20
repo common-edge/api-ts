@@ -18,7 +18,7 @@
     "build": "tsc && cp -f .npmignore package.json lib/",
     "pack": "npm run build && cd lib && npm pack",
     "prepublishOnly": "cd .. && npm run build",
-    "publish": "cd lib && npm publish",
+    "publish": "cd lib && npm publish --access=public",
     "test": "echo \"No tests yet."
   },
   "repository": {
