@@ -1,6 +1,6 @@
 import * as t from 'io-ts';
-import { NonEmpty } from '../../type-helpers';
-import { Translations } from '../../Language';
+import { NonEmpty } from '../type-helpers';
+import { Translations } from '../Language';
 
 /** A real numeric value to be substituted in to the model.
  *

@@ -7,6 +7,9 @@ export * as BoxesOptics from "./BoxesOptics";
 // Legacy Glassd models.
 export * as Glassd from "./Glassd";
 
+// Generic Templates.
+export * as Template from './Template';
+
 // Current Silica models.
 export * as Silica from "./Silica";
 

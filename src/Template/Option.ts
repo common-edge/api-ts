@@ -1,5 +1,5 @@
 import * as t from 'io-ts';
-import { Translations } from '../../Language';
+import { Translations } from '../Language';
 
 /** A selection of options. This is made generic to clarify which string goes with what.
  *
