@@ -51,7 +51,15 @@ export const Opening = Poly.Opening(EdgeInfo, JointInfo, SectionInfo, OpeningInf
 /**
  * An `Section` in an `Opening` - a model of a straight length of floor and ceiling.
  *
- * @category Opening
+ * @category Section
  */
 export type Section = Poly.Section<EdgeInfo,JointInfo,SectionInfo>;
 export const Section: t.Type<Section> = Poly.Section(EdgeInfo, JointInfo, SectionInfo);
+
+/**
+ * The tree of `Section`s on an `Opening`.
+ *
+ * @category Section
+ */
+export type SectionTree = Poly.SectionTree<EdgeInfo,JointInfo,SectionInfo>;
+export const SectionTree: t.Type<SectionTree> = Poly.SectionTree(EdgeInfo, JointInfo, SectionInfo);

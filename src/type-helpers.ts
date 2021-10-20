@@ -16,6 +16,9 @@ export const NonEmpty = <T>(codecT: t.Type<T>) => new t.Type<NonEmpty<T>>(
 export type NonEmpty<T> = [T, ...T[]];
 const isNonEmpty = <T>(codecT: t.Type<T>) => (x: unknown): x is NonEmpty<T> => t.array(codecT).is(x) && x.length > 0;
 
+/**
+ * Parse only `true`.
+ */
 export const boolTrue = new t.Type<true>(
     'true',
     (input: unknown): input is true => input === true,
