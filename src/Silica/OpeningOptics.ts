@@ -1,3 +1,8 @@
+/**
+ * Optics for pure manipulation of concrete `Openings`.
+ *
+ * @since 0.1.0
+ */
 import { Lens, Optional } from 'monocle-ts';
 
 import { Opening, OpeningInfo, SectionInfo, JointInfo, Section } from './Opening';
@@ -7,7 +12,14 @@ import { strategyDivision, divisionDivision, DivisionStep } from './DivisionOpti
 
 import * as Poly from './Opening/PolymorphicOptics';
 
-export { Poly };
+export {
+    /**
+     * Polymorphic versiosn of these optics.
+     *
+     * @since 0.1.0
+     */
+    Poly
+};
 
 /**
  * Focus on a particular `Division` in an `Opening`.
@@ -15,6 +27,7 @@ export { Poly };
  * **Warning!** If the `Strategy` is not `'Manual'`, this will synthesize a
  * `Division`, which may not match the one calculated from the whole model.
  *
+ * @since 0.1.0
  * @category Opening
  */
 export const openingDivision = (section: SectionStep[], division: DivisionStep[]): Optional<Opening, Division> =>
@@ -29,6 +42,7 @@ export const openingDivision = (section: SectionStep[], division: DivisionStep[]
  * **Warning!** If the `Strategy` is not `'Manual'`, this will synthesize a
  * `Division`, which may not match the one calculated from the whole model.
  *
+ * @since 0.1.0
  * @category Section
  */
 export const sectionDivision: Lens<Section, Division> =
@@ -37,6 +51,7 @@ export const sectionDivision: Lens<Section, Division> =
 /**
  * A single step of an index of a `Section`.
  *
+ * @since 0.1.0
  * @category Section
  */
 export type SectionStep = Poly.SectionStep;

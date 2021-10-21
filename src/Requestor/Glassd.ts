@@ -1,3 +1,8 @@
+/**
+ * Requastor performing legacy "Glassd Web Service"-style authentication.
+ *
+ * @since 0.1.0
+ */
 import CryptoES from 'crypto-es';
 import { URL } from 'builtin-url';
 import XMLHttpRequest from 'xhr2';
@@ -9,6 +14,8 @@ import { Requestor } from '../Requestor';
 
 /**
  * Glassd Authentication Key Pair.
+ *
+ * @since 0.1.0
  */
 export interface AuthKey {
     /** Plaintext token to identify user. */
@@ -20,6 +27,8 @@ export interface AuthKey {
 /**
  * Create a `Requestor` for legacy "Glassd Web Service"-style authentication,
  * probably derived from AWS authenication.
+ *
+ * @since 0.1.0
  */
 export const CreateRequestor = (endpoint: string, auth: AuthKey): Requestor => {
     const authorization = (url: URL, method: string, body: string): string => {

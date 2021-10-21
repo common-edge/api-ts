@@ -1,3 +1,8 @@
+/**
+ * Projections.
+ *
+ * @since 0.1.0
+ */
 import * as t from 'io-ts';
 
 import { Angle } from '../Numbers';
@@ -7,20 +12,34 @@ import { Angle } from '../Numbers';
  *
  * Strictly speaking this isn't a projection so much as a modified drawing
  * method and followed by a projection.
+ *
+ * @since 0.1.0
  */
 export interface ProjectionFlat {
     type: 'Flat';
 };
+/**
+ * Codec for `ProjectionFlat`
+ *
+ * @since 0.1.0
+ */
 export const ProjectionFlat: t.Type<ProjectionFlat> = t.interface({
     type: t.literal('Flat'),
 });
 
 /**
  * A two dimensional projection looking down from above.
+ *
+ * @since 0.1.0
  */
 export interface ProjectionFloorPlan {
     type: 'FloorPlan';
 };
+/**
+ * Codec for `ProjectionFloorPlan`
+ *
+ * @since 0.1.0
+ */
 export const ProjectionFloorPlan: t.Type<ProjectionFloorPlan> = t.interface({
     type: t.literal('FloorPlan'),
 });
@@ -28,11 +47,18 @@ export const ProjectionFloorPlan: t.Type<ProjectionFloorPlan> = t.interface({
 /**
  * A three dimensional projection in which objects do not appear any smaller
  * when further away from the "viewer".
+ *
+ * @since 0.1.0
  */
 export interface ProjectionIsometric {
     type: 'Isometric';
     Rotate?: Angle;
 };
+/**
+ * Codec for `ProjectionIsometric`
+ *
+ * @since 0.1.0
+ */
 export const ProjectionIsometric: t.Type<ProjectionIsometric> = t.intersection([
     t.interface({
         type: t.literal('Isometric'),
@@ -44,8 +70,15 @@ export const ProjectionIsometric: t.Type<ProjectionIsometric> = t.intersection([
 
 /**
  * Top level projection type.
+ *
+ * @since 0.1.0
  */
 export type Projection = ProjectionFlat | ProjectionFloorPlan | ProjectionIsometric;
+/**
+ * Codec for `Projection`
+ *
+ * @since 0.1.0
+ */
 export const Projection: t.Type<Projection> = t.union([
     ProjectionFlat,
     ProjectionFloorPlan,
@@ -54,5 +87,7 @@ export const Projection: t.Type<Projection> = t.union([
 
 /**
  * Just the tag field from the projection type.
+ *
+ * @since 0.1.0
  */
 export type ProjectionTag = Projection['type'];

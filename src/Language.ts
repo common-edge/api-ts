@@ -1,20 +1,39 @@
+/**
+ * Language and Translation support.
+ *
+ * @since 0.1.0
+ */
 import * as t from 'io-ts';
 
-const trans = {
+const trans: {[k in Language]: t.Type<string>} = {
     eng: t.string,
     cmn: t.string,
 };
 
 /**
- * Translations of something into multiple languages.
+ * ISO 639-3 codes of supported languages.
+ *
+ * @since 0.1.0
  */
-export const Translations = t.partial(trans);
-export type Translations = t.TypeOf<typeof Translations>;
-export const isTranslations = Translations.is;
+export type Language = 'eng' | 'cmn';
 
 /**
- * ISO 639-3 Codes codes of supported languages.
+ * Codec for `Language`.
+ *
+ * @since 0.1.0
  */
-export const Language = t.keyof(trans);
-export type Language = t.TypeOf<typeof Language>;
-export const isLanguage = Language.is;
+export const Language: t.Type<Language> = t.keyof(trans);
+
+/**
+ * Translations of something into multiple languages.
+ *
+ * @since 0.1.0
+ */
+export type Translations = {[k in Language]?: string};
+
+/**
+ * Codec for `Translations`.
+ *
+ * @since 0.1.0
+ */
+export const Translations: t.Type<Translations> = t.partial(trans);

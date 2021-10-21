@@ -1,19 +1,35 @@
 /**
  * Concrete Division and Strategy Types and Guards, used in the submitted model.
+ *
+ * @since 0.1.0
  */
 import { EdgeInfo, PanelInfo } from './Panel';
 import * as Poly from './Division/Polymorphic';
 
-export { Poly };
+export {
+    /**
+     * Polymorphic versions of these types (and more).
+     *
+     * @since 0.1.0
+     */
+    Poly
+};
 
 /**
  * A `Strategy`.
  *
  * The general approach to how to divide a `Plane` (two dimentional view of a `Section`) into `Panel`s.
  *
+ * @since 0.1.0
  * @category Strategy
  */
 export type Strategy = Poly.Strategy<EdgeInfo,PanelInfo>;
+/**
+ * Codec for `Strategy`.
+ *
+ * @since 0.1.0
+ * @category Strategy
+ */
 export const Strategy = Poly.Strategy(EdgeInfo,PanelInfo);
 
 /**
@@ -21,9 +37,16 @@ export const Strategy = Poly.Strategy(EdgeInfo,PanelInfo);
  *
  * The actual instructions for dividing a `Plane` (two dimentional view of a `Section`) into `Panel`s.
  *
+ * @since 0.1.0
  * @category Division
  */
 export type Division = Poly.Division<EdgeInfo,PanelInfo>;
+/**
+ * Codec for `Division`.
+ *
+ * @since 0.1.0
+ * @category Division
+ */
 export const Division = Poly.Division(EdgeInfo,PanelInfo);
 
 /**
@@ -31,9 +54,16 @@ export const Division = Poly.Division(EdgeInfo,PanelInfo);
  *
  * Don't divide this panel further.
  *
+ * @since 0.1.0
  * @category Division
  */
 export type DivisionWhole = Poly.DivisionWhole<EdgeInfo,PanelInfo>;
+/**
+ * Codec for `DivisionWhole`.
+ *
+ * @since 0.1.0
+ * @category Division
+ */
 export const DivisionWhole = Poly.DivisionWhole(EdgeInfo,PanelInfo);
 
 /**
@@ -41,7 +71,14 @@ export const DivisionWhole = Poly.DivisionWhole(EdgeInfo,PanelInfo);
  *
  * Divide this `Panel` into two `Panel`s.
  *
+ * @since 0.1.0
  * @category Division
  */
 export type DivisionDivided = Poly.DivisionDivided<EdgeInfo,PanelInfo>;
+/**
+ * Codec for `DivisionDivided`.
+ *
+ * @since 0.1.0
+ * @category Division
+ */
 export const DivisionDivided = Poly.DivisionDivided(EdgeInfo,PanelInfo);

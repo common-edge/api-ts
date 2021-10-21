@@ -1,3 +1,9 @@
+/**
+ * Optics for pure manipulation of polymorphic `Division`s.
+ *
+ * @since 0.1.0
+ */
+
 import { Lens, Optional } from 'monocle-ts';
 import { some, none } from 'fp-ts/Option';
 import { idOpt } from '../../optics';
@@ -10,6 +16,7 @@ import { Division, Strategy } from '../Division/Polymorphic';
  * **Warning!** If the `Strategy` is not `'Manual'`, this will synthesize a
  * `Division`, which may not match the one calculated from the whole model.
  *
+ * @since 0.1.0
  * @category Strategy
  */
 export const strategyDivision = <A,B>(): Lens<Strategy<A,B>, Division<A,B>> => new Lens(
@@ -26,6 +33,7 @@ export const strategyDivision = <A,B>(): Lens<Strategy<A,B>, Division<A,B>> => n
 /**
  * Focus on a child `Division`, given it's index.
  *
+ * @since 0.1.0
  * @category Division
  */
 export const divisionDivision = <A,B>(is: DivisionStep[]): Optional<Division<A,B>, Division<A,B>> =>
@@ -34,6 +42,7 @@ export const divisionDivision = <A,B>(is: DivisionStep[]): Optional<Division<A,B
 /**
  * Focus on an immediate child `Division`, given it's index.
  *
+ * @since 0.1.0
  * @category Division
  */
 export const divisionDivisionStep = <A,B>(i: DivisionStep) => new Optional<Division<A,B>, Division<A,B>>(
@@ -44,6 +53,7 @@ export const divisionDivisionStep = <A,B>(i: DivisionStep) => new Optional<Divis
 /**
  * A single step of an index of a `Division`.
  *
+ * @since 0.1.0
  * @category Division
  */
 export type DivisionStep = 'Left' | 'Right';

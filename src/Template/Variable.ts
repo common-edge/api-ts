@@ -1,5 +1,10 @@
+/**
+ * Variable contexts in templates.
+ *
+ * @since 0.1.0
+ */
 import * as t from 'io-ts';
-import { NonEmpty } from '../type-helpers';
+import { NonEmpty } from '../Boxes';
 import { Translations } from '../Language';
 
 /** A real numeric value to be substituted in to the model.
@@ -10,6 +15,8 @@ import { Translations } from '../Language';
  * - The `names` field holds the user-friendly names for this variable.
  * - The `value` field is the numeric value to be used. It _must_ be within the range
  *   specified in`range`.
+ *
+ * @since 0.1.0
  */
 export type Variable<T> = {
     label: T,
@@ -17,6 +24,11 @@ export type Variable<T> = {
     range: Range,
     value: number,
 };
+/**
+ * Codec for `Variable`.
+ *
+ * @since 0.1.0
+ */
 export const Variable = <T>(codecT: t.Type<T>): t.Type<Variable<T>> => t.interface({
     label: codecT,
     names: Translations,
@@ -27,6 +39,8 @@ export const Variable = <T>(codecT: t.Type<T>): t.Type<Variable<T>> => t.interfa
 /** A range of numbers from `min` to `max`.
  *
  * There must exist some natural number `a`, such that `min + a * step = x`.
+ *
+ * @since 0.1.0
  */
 export type RangeRange = {
     type: 'range',
@@ -34,6 +48,11 @@ export type RangeRange = {
     max: number,
     step: number,
 };
+/**
+ * Codec for `RangeRange`.
+ *
+ * @since 0.1.0
+ */
 export const RangeRange: t.Type<RangeRange> = t.interface({
     type: t.literal('range'),
     min: t.number,
@@ -42,18 +61,33 @@ export const RangeRange: t.Type<RangeRange> = t.interface({
 });
 
 /** A list of numbers that may be submitted, there will be at least one entry.
+ *
+ * @since 0.1.0
  */
 export type RangeSet = {
     type: 'set',
     set: NonEmpty<number>,
 };
+/**
+ * Codec for `RangeRange`.
+ *
+ * @since 0.1.0
+ */
 export const RangeSet: t.Type<RangeSet> = t.interface({
     type: t.literal('set'),
     set: NonEmpty(t.number),
 });
 
-/** Constraints on values of a `Variable`. */
+/** Constraints on values of a `Variable`.
+ *
+ * @since 0.1.0
+ */
 export type Range = RangeRange | RangeSet;
+/**
+ * Codec for `Range`.
+ *
+ * @since 0.1.0
+ */
 export const Range: t.Type<Range> = t.union([
     RangeRange,
     RangeSet,

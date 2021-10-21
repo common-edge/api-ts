@@ -1,3 +1,8 @@
+/**
+ * Panels
+ *
+ * @since 0.1.0
+ */
 import * as t from 'io-ts';
 
 /**
@@ -5,17 +10,31 @@ import * as t from 'io-ts';
  *
  * TODO will be filled in once we understand what's needed.
  *
+ * @since 0.1.0
  * @category Paramaters
  */
 export type EdgeInfo = unknown;
-export const EdgeInfo = t.unknown;
+/**
+ * Codec for `EdgeInfo`.
+ *
+ * @since 0.1.0
+ * @category Paramaters
+ */
+export const EdgeInfo: t.Type<EdgeInfo> = t.unknown;
 
 /**
  * The information about each panel.
  *
  * TODO will be filled in once we understand what's needed.
  *
+ * @since 0.1.0
  * @category Paramaters
  */
 export type PanelInfo = unknown;
-export const PanelInfo = t.unknown;
+/**
+ * Codec for `PanelInfo`.
+ *
+ * @since 0.1.0
+ * @category Paramaters
+ */
+export const PanelInfo: t.Type<PanelInfo> = t.unknown;

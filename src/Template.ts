@@ -1,3 +1,8 @@
+/**
+ * Templates for simplified interaction with any model.
+ *
+ * @since 0.1.0
+ */
 import * as t from 'io-ts';
 import { Option } from './Template/Option';
 import { Variable } from './Template/Variable';
@@ -12,12 +17,19 @@ import { Variable } from './Template/Variable';
  * - 'vars' holds numeric variables, these are real numeric values either taken from a range
  *   (sutiable for an number input element or similar) or a enumerated list. Prime examples
  *   are measurements.
+ *
+ * @since 0.1.0
  */
 export type Template = {
     data: unknown,
     opts: Option<string,string>[],
     vars: Variable<string>[],
 };
+/**
+ * Codec for `Template`.
+ *
+ * @since 0.1.0
+ */
 export const Template: t.Type<Template> = t.interface({
     data: t.unknown,
     opts: t.array(Option(t.string, t.string)),
