@@ -119,7 +119,7 @@ export type MeasureStraight = t.TypeOf<typeof MeasureStraight>;
  * @category Measure
  */
 export const MeasureStraight = t.interface({
-    Type: t.literal('straight'),
+    type: t.literal('Straight'),
     Distance: t.union([Distance, t.null]),
     Outage: t.number,
 });
@@ -138,7 +138,7 @@ export type MeasureAxial = t.TypeOf<typeof MeasureAxial>;
  * @category Measure
  */
 export const MeasureAxial = t.interface({
-    Type: t.literal('axial'),
+    type: t.literal('Axial'),
     Major: t.union([Distance, t.null]),
     Minor: t.number,
 });
@@ -157,7 +157,7 @@ export type MeasureBowed = t.TypeOf<typeof MeasureBowed>;
  * @category Measure
  */
 export const MeasureBowed = t.interface({
-    Type: t.literal('bowed'),
+    type: t.literal('Bowed'),
     Major: t.union([Distance, t.null]),
     Minor: t.number,
 });
@@ -177,7 +177,7 @@ export type MeasureRound = t.TypeOf<typeof MeasureRound>;
  * @category Measure
  */
 export const MeasureRound = t.interface({
-    Type: t.literal('round'),
+    type: t.literal('Round'),
     Major: t.union([Distance, t.null]),
     Minor: t.number,
 });
@@ -197,7 +197,7 @@ export type MeasureAngle = t.TypeOf<typeof MeasureAngle>;
  * @category Measure
  */
 export const MeasureAngle = t.interface({
-    Type: t.literal('angle'),
+    type: t.literal('Angle'),
     Major: t.union([Distance, t.null]),
     Angle: Angle,
 });

@@ -33,7 +33,7 @@ export const Strategy = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<Stra
  * @category Strategy
  */
 export interface StrategyManual<A,B> {
-    Strategy: 'Manual';
+    type: 'Manual';
     Division: Division<A,B>;
 }
 /**
@@ -44,7 +44,7 @@ export interface StrategyManual<A,B> {
  */
 export const StrategyManual = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<StrategyManual<A,B>> =>
     t.interface({
-        Strategy: t.literal('Manual'),
+        type: t.literal('Manual'),
         Division: Division(codecA, codecB),
     });
 
@@ -55,7 +55,7 @@ export const StrategyManual = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Typ
  * @category Strategy
  */
 export interface StrategyMinimal<A,B> {
-    Strategy: 'Minimal';
+    type: 'Minimal';
     Info: B;
 }
 /**
@@ -66,7 +66,7 @@ export interface StrategyMinimal<A,B> {
  */
 export const StrategyMinimal = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<StrategyMinimal<A,B>> =>
     t.interface({
-        Strategy: t.literal('Minimal'),
+        type: t.literal('Minimal'),
         Info: codecB,
     });
 
@@ -98,7 +98,7 @@ export const Division = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<Divi
  * @category Division
  */
 export interface DivisionWhole<A,B> {
-    Division: 'Whole';
+    type: 'Whole';
     Info: B;
 };
 /**
@@ -109,7 +109,7 @@ export interface DivisionWhole<A,B> {
  */
 export const DivisionWhole = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<DivisionWhole<A,B>> =>
     t.interface({
-        Division: t.literal('Whole'),
+        type: t.literal('Whole'),
         Info: codecB,
     });
 
@@ -120,7 +120,7 @@ export const DivisionWhole = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type
  * @category Division
  */
 export interface DivisionDivided<A,B> {
-    Division: 'Divided';
+    type: 'Divided';
     Left: Division<A,B>;
     LeftEdge: A;
     Right: Division<A,B>;
@@ -136,7 +136,7 @@ export interface DivisionDivided<A,B> {
 export const DivisionDivided = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Type<DivisionDivided<A,B>> =>
     t.recursion('DivisionDivided', () =>
         t.interface({
-            Division: t.literal('Divided'),
+            type: t.literal('Divided'),
             Left: Division(codecA, codecB),
             LeftEdge: codecA,
             Right: Division(codecA, codecB),
@@ -152,7 +152,7 @@ export const DivisionDivided = <A,B>(codecA: t.Type<A>, codecB: t.Type<B>): t.Ty
  * @category Curve
  */
 export const CurveAngled = t.interface({
-    Curve: t.literal('Angled'),
+    type: t.literal('Angled'),
     Side: Side,
     Angle: Angle,
     Corner: Nat,
@@ -174,7 +174,7 @@ export type CurveAngled = t.TypeOf<typeof CurveAngled>;
  * @category Curve
  */
 export const CurveBezier = t.interface({
-    Curve: t.literal('Bezier'),
+    type: t.literal('Bezier'),
     Side: Side,
 });
 /**

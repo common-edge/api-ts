@@ -20,13 +20,13 @@ import { Division, Strategy } from '../Division/Polymorphic';
  * @category Strategy
  */
 export const strategyDivision = <A,B>(): Lens<Strategy<A,B>, Division<A,B>> => new Lens(
-    (s) => { switch (s.Strategy) {
+    (s) => { switch (s.type) {
         case 'Manual': return s.Division;
-        case 'Minimal': return { Division: 'Whole', Info: s.Info };
+        case 'Minimal': return { type: 'Whole', Info: s.Info };
     }},
-    (a) => (s) => { switch (s.Strategy) {
-        case 'Manual': return { Strategy: 'Manual', Division: a};
-        case 'Minimal': return { Strategy: 'Manual', Division: a};
+    (a) => (s) => { switch (s.type) {
+        case 'Manual': return { type: 'Manual', Division: a};
+        case 'Minimal': return { type: 'Manual', Division: a};
     }}
 );
 
@@ -46,8 +46,8 @@ export const divisionDivision = <A,B>(is: DivisionStep[]): Optional<Division<A,B
  * @category Division
  */
 export const divisionDivisionStep = <A,B>(i: DivisionStep) => new Optional<Division<A,B>, Division<A,B>>(
-    (s) => s.Division === 'Divided' ? some(s[i]) : none,
-    (a) => (s) => s.Division === 'Divided' ? {...s, [i]: a} : s
+    (s) => s.type === 'Divided' ? some(s[i]) : none,
+    (a) => (s) => s.type === 'Divided' ? {...s, [i]: a} : s
 );
 
 /**
