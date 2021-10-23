@@ -1,6 +1,6 @@
 {
   "name": "@commonedge/api",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "TypeScript bindings for CommonEdge APIs",
   "dependencies": {
     "builtin-url": "^0.1.0",
