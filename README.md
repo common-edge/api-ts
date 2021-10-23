@@ -31,7 +31,7 @@ pure/immutable fashion with maximum data sharing.
 ### Template
 
 `Template` provides generic templating of an client-opaque model. The client
-can manipulate the `value` field of each `Option` and `Variable`, and the
+can manipulate the `Value` field of each `Option` and `Variable`, and the
 server can then substitute in the variables and apply the options to the data
 payload before sending them on to the appropriate service.
 

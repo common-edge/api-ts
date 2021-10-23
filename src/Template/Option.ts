@@ -8,19 +8,19 @@ import { Translations } from '../Language';
 
 /** A selection of options. This is made generic to clarify which string goes with what.
  *
- * - The `label` can be used for form identifiers etc, and may be used to decide when to
+ * - The `Label` can be used for form identifiers etc, and may be used to decide when to
  *   show a field. They will be consistant between templates of the same type for particular
  *   purposes.
- * - The `names` field holds the user-friendly names for this group of options.
- * - The `value` field is the `label` field from the desired `Entry` from the `range` field.
+ * - The `Names` field holds the user-friendly names for this group of options.
+ * - The `Value` field is the `label` field from the desired `Entry` from the `range` field.
  *
  * @since 0.1.0
  */
 export type Option<T,S> = {
-    label: S,
-    names: Translations,
-    range: Entry<T>[],
-    value: T,
+    Label: S,
+    Names: Translations,
+    Range: Entry<T>[],
+    Value: T,
 };
 /**
  * Codec for Option.
@@ -28,25 +28,25 @@ export type Option<T,S> = {
  * @since 0.1.0
  */
 export const Option = <T,S>(codecT: t.Type<T>, codecS: t.Type<S>): t.Type<Option<T,S>> => t.interface({
-    label: codecS,
-    names: Translations,
-    range: t.array(Entry(codecT)),
-    value: codecT,
+    Label: codecS,
+    Names: Translations,
+    Range: t.array(Entry(codecT)),
+    Value: codecT,
 });
 
 /** An entry in an Option table.
  *
- * - The `label` field is what goes in an `Option`'s `value` field, and may be used for form
+ * - The `Label` field is what goes in an `Option`'s `value` field, and may be used for form
  *   identifiers etc.
- * - The 'names` field holds the user-friendly names for this specific option.
- * - The `value` field is opaque to the client.
+ * - The 'Names` field holds the user-friendly names for this specific option.
+ * - The `Value` field is opaque to the client.
  *
  * @since 0.1.0
  */
 export type Entry<T> = {
-    label: T,
-    names: Translations,
-    value: unknown,
+    Label: T,
+    Names: Translations,
+    Value: unknown,
 };
 /**
  * Codec for Entry.
@@ -54,7 +54,7 @@ export type Entry<T> = {
  * @since 0.1.0
  */
 export const Entry = <T>(codecT: t.Type<T>): t.Type<Entry<T>> => t.interface({
-    label: codecT,
-    names: Translations,
-    value: t.unknown,
+    Label: codecT,
+    Names: Translations,
+    Value: t.unknown,
 });
