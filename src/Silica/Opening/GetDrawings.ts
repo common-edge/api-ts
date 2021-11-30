@@ -33,6 +33,7 @@ export interface DrawOpening {
     type: 'Opening';
     Projection: Projection;
     CurbEdges: boolean;
+    DrawFloor: boolean;
     RulerDirection: 'out' | 'away';
 };
 /**
@@ -44,6 +45,7 @@ export const DrawOpening: t.Type<DrawOpening> = t.interface({
     type: t.literal('Opening'),
     Projection: Projection,
     CurbEdges: t.boolean,
+    DrawFloor: t.boolean,
     RulerDirection: t.keyof({out: null, away: null}),
 });
 
