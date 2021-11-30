@@ -202,15 +202,13 @@ export const Curb = <S extends keyof Directed,A>(s: S, codecA: t.Type<A>): t.Typ
     ]);
 
 /**
- * Measurements from the measurement line to the inside and outside of the
- * `Curb`.
+ * Measurements from the outside to inside of the `Curb`.
  *
  * @since 0.1.0
  * @category Curb
  */
 export interface CurbEdge {
-    Inner: Measurement<"In"> | null;
-    Outer: Measurement<"Out"> | null;
+    Edge: Measurement<"In"> | null;
 };
 /**
  * Codec for `CurbEdge`.
@@ -220,6 +218,5 @@ export interface CurbEdge {
  */
 export const CurbEdge: t.Type<CurbEdge> =
     t.interface({
-        Inner: t.union([Measurement("In"), t.null]),
-        Outer: t.union([Measurement("Out"), t.null]),
+        Edge: t.union([Measurement("In"), t.null]),
     });
