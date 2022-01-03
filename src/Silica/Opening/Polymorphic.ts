@@ -209,6 +209,8 @@ export const Curb = <S extends keyof Directed,A>(s: S, codecA: t.Type<A>): t.Typ
  */
 export interface CurbEdge {
     Edge: Measurement<"In"> | null;
+    EdgeHeight: number | null;
+    EdgeMeasuredLine: number | null;
 };
 /**
  * Codec for `CurbEdge`.
