@@ -1,6 +1,6 @@
 {
 	"enforceDescriptions": true,
 	"exclude": [
-		"src/[a-z0-9.-]*.ts"
+		"src/*/[a-z0-9.-]*.ts"
 	]
 }
